@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Phishing Awareness Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="disclaimer-banner">
+      <span>Training example — do not send</span> · Fictional emails · Dead links only
+    </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="index.html">Phishing Awareness</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../training/overview.md">Risk overview</a>
+          <a href="../training/checklist.md">Checklist</a>
+          <a href="../README.md">Repo README</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Spot the phish</h1>
+        <p>
+          Four realistic (generic) phishing pretexts. Open a scenario in quiz mode,
+          find the red flags, then reveal the annotated answer key and psychology.
+        </p>
+      </section>
+
+      <div class="scenario-grid">
+        <a class="scenario-card" href="scenarios/it-password-reset.html">
+          <div class="num">01</div>
+          <h2>IT password reset</h2>
+          <p>Account suspension threat with a lookalike “secure” domain.</p>
+        </a>
+        <a class="scenario-card" href="scenarios/hr-payroll.html">
+          <div class="num">02</div>
+          <h2>HR / payroll</h2>
+          <p>Bonus + direct-deposit confirmation under a same-day deadline.</p>
+        </a>
+        <a class="scenario-card" href="scenarios/invoice-payment.html">
+          <div class="num">03</div>
+          <h2>Invoice / BEC</h2>
+          <p>Fake CFO asks AP to wire using new bank details — quietly.</p>
+        </a>
+        <a class="scenario-card" href="scenarios/delivery-notification.html">
+          <div class="num">04</div>
+          <h2>Delivery hold</h2>
+          <p>Parcel on hold — reschedule before it’s returned to sender.</p>
+        </a>
+      </div>
+
+      <div class="links-row">
+        <a href="../training/overview.md">Why this matters for organisations →</a>
+        <a href="../training/checklist.md">Reusable catch-it checklist →</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      Security awareness training artifact. No real brands. Do not send these messages or host credential forms.
+      Markdown versions live in <a href="../training/scenarios/">training/scenarios/</a>.
+    </footer>
+  </body>
+</html>

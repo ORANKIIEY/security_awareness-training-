@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HR / payroll — Spot the phish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="disclaimer-banner">
+      <span>Training example — do not send</span> · Dead link · Not a real HR message
+    </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="../index.html">Phishing Awareness</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html">All scenarios</a>
+          <a href="../../training/scenarios/02-hr-payroll.md">Markdown</a>
+          <a href="../../training/checklist.md">Checklist</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="page-title">02 · HR / payroll bonus</h1>
+      <p class="page-lede">
+        Confirm direct deposit today to release a bonus — or risk forfeiture. Find the manipulation before you reveal.
+      </p>
+
+      <div class="toolbar">
+        <button type="button" class="btn" id="reveal-btn">Reveal red flags</button>
+        <button type="button" class="btn btn-secondary" id="hide-btn" hidden>Hide answers (quiz again)</button>
+        <span class="hint" id="quiz-hint">Quiz mode: find the red flags, then reveal the answer key.</span>
+      </div>
+
+      <div class="email-stage">
+        <div class="email-window" aria-label="Fake phishing email mockup">
+          <div class="email-titlebar">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            Inbox preview — training mockup
+          </div>
+          <div class="email-meta">
+            <dl>
+              <dt>From</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">1</span>
+                  <span class="flag-highlight">Acme Corp Payroll &lt;payroll@acme-hr-portal.net&gt;</span>
+                </span>
+              </dd>
+              <dt>Reply-To</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">2</span>
+                  <span class="flag-highlight">payroll-updates@secure-acmebenefits.com</span>
+                </span>
+              </dd>
+              <dt>To</dt>
+              <dd>you@acmecorp.example</dd>
+              <dt>Subject</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">4</span>
+                  <span class="subject flag-highlight">ACTION NEEDED TODAY: Confirm Direct Deposit for Bonus Payout</span>
+                </span>
+              </dd>
+            </dl>
+          </div>
+          <div class="email-body">
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">3</span>
+                <span class="flag-highlight">Dear Employee,</span>
+              </span>
+            </p>
+            <p>
+              Good news — you have been selected for a Q3 performance bonus. To release payment on this Friday’s payroll run,
+              you must confirm your direct deposit details before 5:00 PM.
+            </p>
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">5</span>
+                <span class="flag-highlight">If we do not receive confirmation, your bonus will be deferred and may be forfeited under policy 4.2.</span>
+              </span>
+            </p>
+            <div class="cta-wrap flag">
+              <span class="flag-marker" aria-hidden="true">6</span>
+              <a
+                class="cta-btn flag-highlight"
+                href="https://link-disabled-for-training-purposes.example/deposit-confirm"
+                data-training-dead-link
+                >Confirm Direct Deposit</a
+              >
+              <span class="link-hint">Hover target: link-disabled-for-training-purposes.example/deposit-confirm</span>
+            </div>
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">7</span>
+                <span class="flag-highlight">Please treat this as confidential.</span>
+              </span>
+            </p>
+            <div class="signature">
+              Regards,<br />
+              <strong>Acme Corp People Operations — Payroll</strong><br />
+              payroll@acme-hr-portal.net
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel hidden-until-reveal" id="answer-key">
+        <h2>Annotated red flags</h2>
+        <ol class="flag-list">
+          <li><span class="n">1</span><div><strong>Lookalike HR portal domain</strong> — not the real corporate mail domain.</div></li>
+          <li><span class="n">2</span><div><strong>Different Reply-To</strong> — <code>secure-acmebenefits.com</code> is another host entirely.</div></li>
+          <li><span class="n">3</span><div><strong>Generic greeting</strong> — “Dear Employee” for a personal bonus claim.</div></li>
+          <li><span class="n">4</span><div><strong>Reward + deadline</strong> — bonus language stacked with “TODAY.”</div></li>
+          <li><span class="n">5</span><div><strong>Forfeiture threat</strong> — loss aversion on money you “already earned.”</div></li>
+          <li><span class="n">6</span><div><strong>Unexpected deposit form link</strong> — real changes go through known HRIS/SSO.</div></li>
+          <li><span class="n">7</span><div><strong>“Confidential”</strong> — discourages verifying with a colleague or manager.</div></li>
+        </ol>
+      </section>
+
+      <section class="panel hidden-until-reveal">
+        <h2>Psychology</h2>
+        <table class="psych-table">
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Principle</th>
+              <th>Why it works</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bonus payout</td>
+              <td>Curiosity / reward</td>
+              <td>Positive outcomes pull clicks as hard as threats push them.</td>
+            </tr>
+            <tr>
+              <td>Same-day / Friday payroll</td>
+              <td>Urgency</td>
+              <td>Payday timing makes delay feel costly.</td>
+            </tr>
+            <tr>
+              <td>Forfeiture language</td>
+              <td>Loss aversion</td>
+              <td>People fight to keep a promised gain.</td>
+            </tr>
+            <tr>
+              <td>Payroll authority</td>
+              <td>Authority</td>
+              <td>HR controls pay; process requests feel mandatory.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Next steps</h2>
+        <p>
+          Use the shared <a href="../../training/checklist.md">catch-it checklist</a>.
+          Full write-up:
+          <a href="../../training/scenarios/02-hr-payroll.md">02-hr-payroll.md</a>.
+          Org risk framing: <a href="../../training/overview.md">overview.md</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      TRAINING EXAMPLE — DO NOT SEND. Generic Acme Corp only. CTA is a dead placeholder.
+    </footer>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

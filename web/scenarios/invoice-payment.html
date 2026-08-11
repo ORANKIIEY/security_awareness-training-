@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Invoice / BEC — Spot the phish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="disclaimer-banner">
+      <span>Training example — do not send</span> · Dead link · Not a real CFO message
+    </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="../index.html">Phishing Awareness</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html">All scenarios</a>
+          <a href="../../training/scenarios/03-invoice-payment.md">Markdown</a>
+          <a href="../../training/checklist.md">Checklist</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="page-title">03 · Invoice / payment (BEC-style)</h1>
+      <p class="page-lede">
+        A “CFO” wants a vendor wire today using new bank details — and asks you not to loop the thread. Spot the tells.
+      </p>
+
+      <div class="toolbar">
+        <button type="button" class="btn" id="reveal-btn">Reveal red flags</button>
+        <button type="button" class="btn btn-secondary" id="hide-btn" hidden>Hide answers (quiz again)</button>
+        <span class="hint" id="quiz-hint">Quiz mode: find the red flags, then reveal the answer key.</span>
+      </div>
+
+      <div class="email-stage">
+        <div class="email-window" aria-label="Fake phishing email mockup">
+          <div class="email-titlebar">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            Inbox preview — training mockup
+          </div>
+          <div class="email-meta">
+            <dl>
+              <dt>From</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">1</span>
+                  <span class="flag-highlight">Jordan Lee (CFO) &lt;j.lee@acme-corp-finance.co&gt;</span>
+                </span>
+              </dd>
+              <dt>Reply-To</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">2</span>
+                  <span class="flag-highlight">j.lee.payments@acmecorp-vendors.net</span>
+                </span>
+              </dd>
+              <dt>To</dt>
+              <dd>ap@acmecorp.example</dd>
+              <dt>Subject</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">4</span>
+                  <span class="subject flag-highlight">Urgent — Process vendor invoice #44821 today (do not loop email thread)</span>
+                </span>
+              </dd>
+            </dl>
+          </div>
+          <div class="email-body">
+            <p>Hi,</p>
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">3</span>
+                <span class="flag-highlight">I’m in back-to-back meetings and need Accounts Payable to process the attached invoice for Northwind Supplies before close of business.</span>
+              </span>
+            </p>
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">5</span>
+                <span class="flag-highlight">New banking details are on the invoice — use those, not the old ones on file.</span>
+              </span>
+            </p>
+            <p>
+              Please confirm once the wire is sent.
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">6</span>
+                <span class="flag-highlight">Keep this between us for now; I’ll update the full thread tomorrow.</span>
+              </span>
+            </p>
+            <div class="cta-wrap flag">
+              <span class="flag-marker" aria-hidden="true">7</span>
+              <a
+                class="cta-btn flag-highlight"
+                href="https://link-disabled-for-training-purposes.example/invoice-44821"
+                data-training-dead-link
+                >View Invoice PDF</a
+              >
+              <span class="link-hint">Hover target: link-disabled-for-training-purposes.example/invoice-44821</span>
+            </div>
+            <div class="signature flag">
+              <span class="flag-marker" aria-hidden="true">8</span>
+              <div class="flag-highlight">
+                Thanks,<br />
+                <strong>Jordan</strong><br />
+                CFO, Acme Corp<br />
+                Sent from my iPhone
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel hidden-until-reveal" id="answer-key">
+        <h2>Annotated red flags</h2>
+        <ol class="flag-list">
+          <li><span class="n">1</span><div><strong>Lookalike finance domain</strong> — <code>acme-corp-finance.co</code> is not corporate mail.</div></li>
+          <li><span class="n">2</span><div><strong>Vendor-looking Reply-To</strong> — payment thread steered off-network.</div></li>
+          <li><span class="n">3</span><div><strong>Executive pressure + busyness</strong> — authority costume of a rushed CFO.</div></li>
+          <li><span class="n">4</span><div><strong>Same-day urgency</strong> — skips dual-control time.</div></li>
+          <li><span class="n">5</span><div><strong>New bank details</strong> — classic BEC: change payee outside verified channels.</div></li>
+          <li><span class="n">6</span><div><strong>Secrecy / don’t loop thread</strong> — blocks call-backs and dual review.</div></li>
+          <li><span class="n">7</span><div><strong>Unexpected invoice link</strong> — verify before opening or paying.</div></li>
+          <li><span class="n">8</span><div><strong>Mobile sign-off realism</strong> — familiarity cue that can lower suspicion.</div></li>
+        </ol>
+      </section>
+
+      <section class="panel hidden-until-reveal">
+        <h2>Psychology</h2>
+        <table class="psych-table">
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Principle</th>
+              <th>Why it works</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CFO title</td>
+              <td>Authority</td>
+              <td>Staff hesitate to challenge senior leaders.</td>
+            </tr>
+            <tr>
+              <td>Wire today</td>
+              <td>Urgency</td>
+              <td>Process controls get skipped “just this once.”</td>
+            </tr>
+            <tr>
+              <td>Keep it quiet</td>
+              <td>Fear / social pressure</td>
+              <td>Isolates the target from colleagues who would spot the scam.</td>
+            </tr>
+            <tr>
+              <td>Invoice + AP routine</td>
+              <td>Familiarity</td>
+              <td>Mundane payment workflows feel safe.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Next steps</h2>
+        <p>
+          Use the shared <a href="../../training/checklist.md">catch-it checklist</a>.
+          Full write-up:
+          <a href="../../training/scenarios/03-invoice-payment.md">03-invoice-payment.md</a>.
+          Org risk framing: <a href="../../training/overview.md">overview.md</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      TRAINING EXAMPLE — DO NOT SEND. Generic Acme Corp only. CTA is a dead placeholder.
+    </footer>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

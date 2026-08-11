@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delivery notification — Spot the phish</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <div class="disclaimer-banner">
+      <span>Training example — do not send</span> · Dead link · Not a real courier
+    </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="brand" href="../index.html">Phishing Awareness</a>
+        <nav class="nav" aria-label="Primary">
+          <a href="../index.html">All scenarios</a>
+          <a href="../../training/scenarios/04-delivery-notification.md">Markdown</a>
+          <a href="../../training/checklist.md">Checklist</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="page-title">04 · Delivery notification</h1>
+      <p class="page-lede">
+        A parcel is “on hold” — confirm within 12 hours or it’s returned. Generic courier only; find the red flags.
+      </p>
+
+      <div class="toolbar">
+        <button type="button" class="btn" id="reveal-btn">Reveal red flags</button>
+        <button type="button" class="btn btn-secondary" id="hide-btn" hidden>Hide answers (quiz again)</button>
+        <span class="hint" id="quiz-hint">Quiz mode: find the red flags, then reveal the answer key.</span>
+      </div>
+
+      <div class="email-stage">
+        <div class="email-window" aria-label="Fake phishing email mockup">
+          <div class="email-titlebar">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            <span class="dot" aria-hidden="true"></span>
+            Inbox preview — training mockup
+          </div>
+          <div class="email-meta">
+            <dl>
+              <dt>From</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">1</span>
+                  <span class="flag-highlight">ParcelLink Delivery &lt;alerts@parcel-link-delivery-secure.com&gt;</span>
+                </span>
+              </dd>
+              <dt>Reply-To</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">2</span>
+                  <span class="flag-highlight">support@parcelink-tracking.net</span>
+                </span>
+              </dd>
+              <dt>To</dt>
+              <dd>you@email.example</dd>
+              <dt>Subject</dt>
+              <dd>
+                <span class="flag">
+                  <span class="flag-marker" aria-hidden="true">4</span>
+                  <span class="subject flag-highlight">Your package is on hold — confirm delivery within 12 hours</span>
+                </span>
+              </dd>
+            </dl>
+          </div>
+          <div class="email-body">
+            <p>
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">3</span>
+                <span class="flag-highlight">Dear Customer,</span>
+              </span>
+            </p>
+            <p>
+              We attempted to deliver your parcel
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">5</span>
+                <span class="flag-highlight">(Tracking #PL-9284410)</span>
+              </span>
+              but the address could not be verified.
+            </p>
+            <p>
+              Your item will be returned to the sender unless you confirm delivery preferences within 12 hours.
+              A small redelivery fee may apply.
+            </p>
+            <div class="cta-wrap flag">
+              <span class="flag-marker" aria-hidden="true">6</span>
+              <a
+                class="cta-btn flag-highlight"
+                href="https://link-disabled-for-training-purposes.example/reschedule"
+                data-training-dead-link
+                >Reschedule Delivery</a
+              >
+              <span class="link-hint">Hover target: link-disabled-for-training-purposes.example/reschedule</span>
+            </div>
+            <p>Track status anytime on our secure portal.</p>
+            <div class="signature flag">
+              <span class="flag-marker" aria-hidden="true">8</span>
+              <div class="flag-highlight">
+                ParcelLink Automated Notifications<br />
+                Do not reply to this message.
+              </div>
+            </div>
+            <p class="link-hint" style="margin-top: 1rem">
+              <span class="flag">
+                <span class="flag-marker" aria-hidden="true">7</span>
+                <span class="flag-highlight">Real destination ≠ any known courier (training placeholder only).</span>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <section class="panel hidden-until-reveal" id="answer-key">
+        <h2>Annotated red flags</h2>
+        <ol class="flag-list">
+          <li><span class="n">1</span><div><strong>Hyphen-stuffed “secure” domain</strong> — lookalike logistics branding.</div></li>
+          <li><span class="n">2</span><div><strong>Typosquat Reply-To</strong> — <code>parcelink</code> vs <code>parcel-link</code>.</div></li>
+          <li><span class="n">3</span><div><strong>Generic greeting</strong> — no personal name or real order context.</div></li>
+          <li><span class="n">4</span><div><strong>12-hour deadline</strong> — artificial urgency.</div></li>
+          <li><span class="n">5</span><div><strong>Unexpected tracking ID</strong> — you didn’t order this (or can’t verify it).</div></li>
+          <li><span class="n">6</span><div><strong>Fee / reschedule CTA</strong> — harvest pretext disguised as logistics.</div></li>
+          <li><span class="n">7</span><div><strong>Wrong hover URL</strong> — not a real carrier host.</div></li>
+          <li><span class="n">8</span><div><strong>“Do not reply”</strong> — funnels you only to the malicious link.</div></li>
+        </ol>
+      </section>
+
+      <section class="panel hidden-until-reveal">
+        <h2>Psychology</h2>
+        <table class="psych-table">
+          <thead>
+            <tr>
+              <th>Technique</th>
+              <th>Principle</th>
+              <th>Why it works</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Package returned to sender</td>
+              <td>Loss aversion</td>
+              <td>People hate losing a parcel they believe is theirs.</td>
+            </tr>
+            <tr>
+              <td>12-hour window</td>
+              <td>Urgency</td>
+              <td>Encourages immediate mobile taps.</td>
+            </tr>
+            <tr>
+              <td>Tracking jargon</td>
+              <td>Familiarity</td>
+              <td>Mundane logistics language feels trustworthy.</td>
+            </tr>
+            <tr>
+              <td>Automated system tone</td>
+              <td>Authority</td>
+              <td>“Systems” feel official and harder to question.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Next steps</h2>
+        <p>
+          Use the shared <a href="../../training/checklist.md">catch-it checklist</a>.
+          Full write-up:
+          <a href="../../training/scenarios/04-delivery-notification.md">04-delivery-notification.md</a>.
+          Org risk framing: <a href="../../training/overview.md">overview.md</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      TRAINING EXAMPLE — DO NOT SEND. Fictional ParcelLink only — not a real courier. CTA is a dead placeholder.
+    </footer>
+    <script src="../js/app.js"></script>
+  </body>
+</html>
