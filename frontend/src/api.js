@@ -1,10 +1,19 @@
 const OFFLINE_MESSAGE =
   "Can't reach the analysis server. Start the backend (python main.py in the backend folder) and try again.";
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
+function resolveUrl(path) {
+  if (!path) return path;
+  if (/^https?:\/\//i.test(path)) return path;
+  if (API_BASE_URL) return `${API_BASE_URL}${path}`;
+  return path;
+}
+
 async function request(path, options = {}) {
   let res;
   try {
-    res = await fetch(path, options);
+    res = await fetch(resolveUrl(path), options);
   } catch (err) {
     if (err.name === 'AbortError') throw err;
     throw new Error(OFFLINE_MESSAGE);
