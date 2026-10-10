@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, LoaderCircle, RotateCcw } from 'lucide-react';
 import { getJSON } from '../api';
 import { PageHeader, ErrorNotice, StatusIcon } from './ui';
@@ -49,6 +49,7 @@ export default function Quiz() {
   const [best, setBest] = useState(loadBest);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const seedCounter = useRef(0);
 
   const current = attempt[index];
   const answered = selected !== null;
@@ -58,7 +59,8 @@ export default function Quiz() {
     setLoading(true);
     setError('');
     try {
-      const questions = await getJSON(`/api/quiz?count=${QUESTION_COUNT}`);
+      const seed = Date.now() + seedCounter.current++;
+      const questions = await getJSON(`/api/quiz?count=${QUESTION_COUNT}&seed=${seed}`);
       setAttempt(buildAttempt(questions));
       setIndex(0);
       setSelected(null);
@@ -191,7 +193,7 @@ export default function Quiz() {
           </dl>
           <div className="row" style={{ marginTop: 18 }}>
             <button type="button" className="btn btn-primary" onClick={start} disabled={loading}>
-              {loading ? <LoaderCircle size={15} className="spin" /> : <RotateCcw size={15} />} New quiz
+              {loading ? <LoaderCircle size={15} className="spin" /> : <RotateCcw size={15} />} Take quiz again
             </button>
             <a className="btn btn-secondary" href="#/training" style={{ textDecoration: 'none' }}>
               Practise with real emails

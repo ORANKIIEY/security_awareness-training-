@@ -7,6 +7,15 @@ import TrainingTabs from './TrainingTabs';
 
 const LINK_PATTERN = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)|(https?:\/\/[^\s)]+)/g;
 
+function shuffle(items) {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 function MailBody({ text, onHoverLink, onClickLink }) {
   const parts = [];
   let last = 0;
@@ -46,9 +55,10 @@ export default function ScenariosQuiz() {
   useEffect(() => {
     getJSON('/api/scenarios')
       .then((data) => {
-        setScenarios(data);
+        const ordered = shuffle(data);
+        setScenarios(ordered);
         const saved = loadAnswers();
-        const firstOpen = data.find((s) => !saved[s.id]) ?? data[0];
+        const firstOpen = ordered.find((s) => !saved[s.id]) ?? ordered[0];
         setSelectedId(firstOpen?.id ?? null);
       })
       .catch((err) => setError(err.message))
@@ -81,6 +91,17 @@ export default function ScenariosQuiz() {
     setAnswers({});
     saveAnswers({});
     select(scenarios[0]?.id ?? null);
+  };
+
+  const startNewRound = () => {
+    let nextScenarios = shuffle(scenarios);
+    if (nextScenarios.length > 1 && nextScenarios.every((s, i) => s.id === scenarios[i].id)) {
+      nextScenarios = [...nextScenarios.slice(1), nextScenarios[0]];
+    }
+    setScenarios(nextScenarios);
+    setAnswers({});
+    saveAnswers({});
+    select(nextScenarios[0]?.id ?? null);
   };
 
   const goNext = () => {
@@ -231,8 +252,8 @@ export default function ScenariosQuiz() {
                     {allDone ? `Finished: ${stats.correct} of ${scenarios.length} correct.` : `${scenarios.length - stats.answered} left`}
                   </span>
                   {allDone ? (
-                    <button type="button" className="btn btn-secondary" onClick={reset}>
-                      <RotateCcw size={15} /> Start over
+                    <button type="button" className="btn btn-secondary" onClick={startNewRound}>
+                      <RotateCcw size={15} /> Try another round
                     </button>
                   ) : (
                     <button type="button" className="btn btn-primary" onClick={goNext}>

@@ -6,6 +6,53 @@
 
 A Project 2–style phishing awareness package: realistic (but generic) fake emails, annotated red flags, the psychology behind each trick, a reusable catch-it checklist, and organisational risk framing.
 
+## How to run the project locally
+
+### Prerequisites
+
+- Python 3.10+
+- Node.js 18+
+- npm
+
+### 1) Start the backend API
+
+```bash
+cd backend
+python -m venv .venv
+# On Windows:
+.venv\Scripts\activate
+# On macOS/Linux:
+# source .venv/bin/activate
+
+pip install -r requirements.txt
+python main.py
+```
+
+The API will run at http://127.0.0.1:8000
+
+### 2) Start the frontend
+
+Open a second terminal and run:
+
+```bash
+cd frontend
+npm install
+npm run dev -- --host 0.0.0.0
+```
+
+Then visit http://localhost:5173
+
+### 3) Optional: static HTML version
+
+If you want the original static training content without the app UI:
+
+```bash
+# From the repo root
+python3 -m http.server 8080
+```
+
+Then open http://localhost:8080/web/
+
 ## How to use it
 
 ### Markdown (read / interview walkthrough)
@@ -22,11 +69,9 @@ A Project 2–style phishing awareness package: realistic (but generic) fake ema
 
 Open [web/index.html](web/index.html) in a browser. Pick a scenario, try to spot the red flags, then click **Reveal red flags**.
 
-```bash
-# From the repo root (so /web and /training links both work)
-python3 -m http.server 8080
-# Then visit http://localhost:8080/web/
-```
+### App UI
+
+The main interactive experience is in the frontend app, which calls the FastAPI backend for phishing, password, quiz, and website checks.
 
 ## Package structure
 
