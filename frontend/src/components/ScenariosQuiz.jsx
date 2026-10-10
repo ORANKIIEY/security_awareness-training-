@@ -50,6 +50,8 @@ export default function ScenariosQuiz() {
   const [hoverUrl, setHoverUrl] = useState(null);
   const [clickNote, setClickNote] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [generating, setGenerating] = useState(false);
+  const [round, setRound] = useState(1);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -94,14 +96,22 @@ export default function ScenariosQuiz() {
   };
 
   const startNewRound = () => {
-    let nextScenarios = shuffle(scenarios);
-    if (nextScenarios.length > 1 && nextScenarios.every((s, i) => s.id === scenarios[i].id)) {
-      nextScenarios = [...nextScenarios.slice(1), nextScenarios[0]];
-    }
-    setScenarios(nextScenarios);
-    setAnswers({});
-    saveAnswers({});
-    select(nextScenarios[0]?.id ?? null);
+    const seed = Date.now() + round;
+    setGenerating(true);
+    setError('');
+    getJSON(`/api/scenarios?seed=${seed}`)
+      .then((nextScenarios) => {
+        setScenarios(nextScenarios);
+        setAnswers({});
+        saveAnswers({});
+        setSelectedId(nextScenarios[0]?.id ?? null);
+        setHoverUrl(null);
+        setClickNote(false);
+        setRound((currentRound) => currentRound + 1);
+        window.scrollTo(0, 0);
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setGenerating(false));
   };
 
   const goNext = () => {
@@ -121,7 +131,7 @@ export default function ScenariosQuiz() {
     );
   }
 
-  if (error) {
+  if (error && scenarios.length === 0) {
     return (
       <div className="page">
         <PageHeader eyebrow="Learn" title="Phishing training" />
@@ -136,12 +146,13 @@ export default function ScenariosQuiz() {
     <div className="page" style={{ maxWidth: 1080 }}>
       <PageHeader eyebrow="Learn" title="Phishing training">
         Read each email as if it landed in your inbox. Hover over links to see where they really go, then decide whether
-        you'd trust it.
+        you'd trust it. Complete each set to generate another quiz with new emails.
       </PageHeader>
       <TrainingTabs active="training" />
 
       <div className="training">
         <div>
+          <p className="small muted" style={{ marginBottom: 10 }}>Quiz {round}</p>
           <div className="row-between" style={{ marginBottom: 10 }}>
             <span className="small">
               <strong>{stats.correct}</strong> <span className="muted">correct of {stats.answered} answered</span>
@@ -252,8 +263,9 @@ export default function ScenariosQuiz() {
                     {allDone ? `Finished: ${stats.correct} of ${scenarios.length} correct.` : `${scenarios.length - stats.answered} left`}
                   </span>
                   {allDone ? (
-                    <button type="button" className="btn btn-secondary" onClick={startNewRound}>
-                      <RotateCcw size={15} /> Try another round
+                    <button type="button" className="btn btn-secondary" onClick={startNewRound} disabled={generating}>
+                      {generating ? <LoaderCircle size={15} className="spin" /> : <RotateCcw size={15} />}
+                      {generating ? 'Generating new quiz…' : 'Next quiz — generate new emails'}
                     </button>
                   ) : (
                     <button type="button" className="btn btn-primary" onClick={goNext}>
@@ -265,6 +277,7 @@ export default function ScenariosQuiz() {
             )}
           </div>
         )}
+        <ErrorNotice message={error} />
       </div>
     </div>
   );

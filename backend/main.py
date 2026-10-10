@@ -7,6 +7,7 @@ from password_checker import analyze_password, check_hibp_breached
 from phishing_checker import analyze_phishing_email
 from website_checker import inspect_website_security, WebsiteCheckError
 from scenarios_data import SCENARIOS
+from scenario_generator import generate_scenarios
 from quiz_generator import generate_quiz
 
 app = FastAPI(
@@ -86,7 +87,9 @@ async def check_website(payload: WebsiteCheckRequest):
         raise HTTPException(status_code=422, detail=str(e))
 
 @app.get("/api/scenarios")
-def get_scenarios():
+def get_scenarios(seed: Optional[int] = None):
+    if seed is not None:
+        return generate_scenarios(seed)
     return SCENARIOS
 
 @app.get("/api/quiz")

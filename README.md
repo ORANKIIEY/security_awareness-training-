@@ -71,7 +71,7 @@ Open [web/index.html](web/index.html) in a browser. Pick a scenario, try to spot
 
 ### App UI
 
-The main interactive experience is in the frontend app, which calls the FastAPI backend for phishing, password, quiz, and website checks.
+The main interactive experience is in the frontend app, which calls the FastAPI backend for phishing, password, quiz, and website checks. In **Spot the phish**, answer all six emails and choose **Next quiz — generate new emails** to start another round with newly generated examples.
 
 ## Package structure
 
